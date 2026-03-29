@@ -751,6 +751,82 @@
   }
   .toggle-track.on .toggle-knob { left: 22px; }
 
+  /* Answer search */
+  .answer-search-section {
+    margin-bottom: 20px;
+  }
+  .answer-search-section .search-box {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .answer-search-section input {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 15px;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+  }
+  .answer-search-section input:focus {
+    border-color: #4a6cf7;
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+  }
+  .answer-search-section input::placeholder { color: #aaa; }
+  .answer-search-results {
+    margin-top: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+  }
+  .answer-search-results.show { display: block; }
+  .answer-search-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 4px;
+    transition: background 0.15s;
+  }
+  .answer-search-item:hover { background: #f5f7ff; }
+  .answer-search-item .abbr-tag {
+    font-weight: 700;
+    color: #4a6cf7;
+    margin-right: 8px;
+    font-size: 13px;
+  }
+  .answer-search-item .answer-preview {
+    font-size: 13px;
+    color: #555;
+    display: block;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .answer-search-item .answer-preview mark {
+    background: #fff3cd;
+    color: #333;
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+  .answer-search-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .answer-search-count {
+    font-weight: 400;
+    color: #999;
+    font-size: 12px;
+  }
+
   /* 2-column history grid */
   .history-grid {
     display: grid;
@@ -873,6 +949,17 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="answer-search-section">
+      <div class="answer-search-label">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search by Answer
+      </div>
+      <div class="search-box">
+        <input type="text" id="answerSearchInput" placeholder="Search within answers..." autocomplete="off" spellcheck="false">
+      </div>
+      <div class="answer-search-results" id="answerSearchResults"></div>
     </div>
 
     <div class="history-section" id="historySection">
@@ -1394,6 +1481,53 @@ document.addEventListener('click', (e) => {
   if (!e.target.closest('.search-box')) {
     document.getElementById('suggestions').classList.remove('show');
   }
+});
+
+// Answer search
+const answerInput = document.getElementById('answerSearchInput');
+const answerResults = document.getElementById('answerSearchResults');
+
+function searchAnswers(query) {
+  if (!query || query.length < 2) {
+    answerResults.classList.remove('show');
+    return;
+  }
+  const q = query.toLowerCase();
+  const matches = entries.filter(e =>
+    e.answer.toLowerCase().includes(q)
+  ).slice(0, 20);
+
+  if (matches.length === 0) {
+    answerResults.innerHTML = '<div style="padding:10px 14px;color:#999;font-size:13px;">No answers match your search.</div>';
+    answerResults.classList.add('show');
+    return;
+  }
+
+  answerResults.innerHTML = '<div class="answer-search-count">' + matches.length + (matches.length === 20 ? '+' : '') + ' results</div>' +
+    matches.map(m => {
+      const idx = m.answer.toLowerCase().indexOf(q);
+      const start = Math.max(0, idx - 40);
+      const end = Math.min(m.answer.length, idx + q.length + 60);
+      let preview = (start > 0 ? '...' : '') +
+        escapeHtml(m.answer.slice(start, idx)) +
+        '<mark>' + escapeHtml(m.answer.slice(idx, idx + q.length)) + '</mark>' +
+        escapeHtml(m.answer.slice(idx + q.length, end)) +
+        (end < m.answer.length ? '...' : '');
+      return `<div class="answer-search-item" onclick="selectEntry('${m.abbr}');answerInput.value='';answerResults.classList.remove('show');">
+        <span class="abbr-tag">${escapeHtml(m.abbr)}</span>
+        <span class="topic-tag" style="font-size:12px;color:#888;">${escapeHtml(m.topic)}</span>
+        <span class="answer-preview">${preview}</span>
+      </div>`;
+    }).join('');
+  answerResults.classList.add('show');
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+answerInput.addEventListener('input', (e) => {
+  searchAnswers(e.target.value.trim());
 });
 
 // Load on page ready
