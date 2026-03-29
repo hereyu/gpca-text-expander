@@ -300,6 +300,245 @@
     background: #fff;
     border-radius: 10px;
   }
+
+  /* Action buttons row */
+  .action-btns {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .edit-btn {
+    background: #f0f2f5;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .edit-btn:hover { background: #e4e7eb; }
+  .save-edit-btn {
+    background: #22c55e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .save-edit-btn:hover { background: #1aab4f; }
+  .cancel-edit-btn {
+    background: #f0f2f5;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .cancel-edit-btn:hover { background: #e4e7eb; }
+
+  /* Edit mode textarea */
+  .edit-textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 14px;
+    font-size: 15px;
+    line-height: 1.7;
+    font-family: inherit;
+    border: 2px solid #4a6cf7;
+    border-radius: 8px;
+    outline: none;
+    resize: vertical;
+    background: #fafbff;
+  }
+  .edit-textarea:focus {
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+  }
+
+  /* Badges */
+  .edited-badge {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .custom-badge {
+    background: #dcfce7;
+    color: #166534;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  /* Add New Entry section */
+  .add-section {
+    margin-top: 24px;
+    margin-bottom: 4px;
+  }
+  .add-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 2px dashed #ccc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    justify-content: center;
+  }
+  .add-toggle:hover { border-color: #4a6cf7; color: #4a6cf7; }
+  .add-toggle.active { border-color: #4a6cf7; color: #4a6cf7; border-style: solid; }
+
+  .add-form {
+    display: none;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-top: 3px solid #4a6cf7;
+  }
+  .add-form.show { display: block; }
+  .add-form-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 16px;
+  }
+  .form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .form-group.flex-1 { flex: 1; }
+  .form-group.flex-2 { flex: 2; }
+  .form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: #4a6cf7;
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+  }
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .save-new-btn {
+    background: #4a6cf7;
+    color: #fff;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .save-new-btn:hover { background: #3a5ce5; }
+  .clear-form-btn {
+    background: #f0f2f5;
+    color: #555;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .clear-form-btn:hover { background: #e4e7eb; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    z-index: 100;
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .toast.success { background: #166534; }
+  .toast.error { background: #991b1b; }
+
+  @media (max-width: 600px) {
+    .form-row { flex-direction: column; }
+    .action-btns { flex-wrap: wrap; }
+    .result-header { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
@@ -325,17 +564,67 @@
         <div class="result-meta">
           <span class="abbr-badge" id="resultAbbr"></span>
           <span class="topic-badge" id="resultTopic"></span>
+          <span class="edited-badge" id="editedBadge" style="display:none;">edited</span>
+          <span class="custom-badge" id="customBadge" style="display:none;">custom</span>
         </div>
-        <button class="copy-btn" id="copyBtn" onclick="copyAnswer()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-          Copy Answer
-        </button>
+        <div class="action-btns" id="actionBtns">
+          <button class="copy-btn" id="copyBtn" onclick="copyAnswer()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            Copy Answer
+          </button>
+          <button class="edit-btn" id="editBtn" onclick="enterEditMode()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit
+          </button>
+        </div>
+        <div class="action-btns" id="editActionBtns" style="display:none;">
+          <button class="save-edit-btn" onclick="saveEdit()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Save
+          </button>
+          <button class="cancel-edit-btn" onclick="cancelEdit()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Cancel
+          </button>
+        </div>
       </div>
       <div class="result-question" id="resultQuestion"></div>
       <div class="result-answer" id="resultAnswer"></div>
+      <textarea class="edit-textarea" id="editTextarea" style="display:none;"></textarea>
     </div>
 
     <div class="status-bar" id="statusBar"></div>
+
+    <div class="add-section">
+      <button class="add-toggle" id="addToggle" onclick="toggleAddForm()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Add New Abbreviation
+      </button>
+      <div class="add-form" id="addForm">
+        <div class="add-form-title">New Entry</div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label>Abbreviation</label>
+            <input type="text" id="newAbbr" placeholder="e.g. myabbr" spellcheck="false">
+          </div>
+          <div class="form-group flex-2">
+            <label>Category</label>
+            <select id="newCategory"></select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 14px;">
+          <label>Answer / Response</label>
+          <textarea id="newAnswer" placeholder="Type the full response here..."></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="clear-form-btn" onclick="clearAddForm()">Clear</button>
+          <button class="save-new-btn" onclick="saveNewEntry()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Save New Entry
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="history-section" id="historySection">
       <div class="history-title">
@@ -349,24 +638,51 @@
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script src="faq-data.js"></script>
 <script>
 let entries = [];
 let activeIndex = -1;
 let recentSearches = JSON.parse(localStorage.getItem('gpca_recent') || '[]');
+let edits = JSON.parse(localStorage.getItem('gpca_edits') || '{}');
+let customEntries = JSON.parse(localStorage.getItem('gpca_custom') || '[]');
+let currentEntry = null;
+let isEditing = false;
 
 function loadData() {
+  // Base entries
   entries = FAQ_DATA.map(d => ({
     abbr: d.a,
     topic: d.t,
     question: d.q,
-    answer: d.r
+    answer: d.r,
+    isCustom: false
   }));
+
+  // Apply saved edits
+  entries.forEach(e => {
+    if (edits[e.abbr]) e.answer = edits[e.abbr];
+  });
+
+  // Add custom entries
+  customEntries.forEach(d => {
+    // Skip if abbreviation already exists (no duplicates)
+    if (!entries.find(e => e.abbr === d.a)) {
+      entries.push({ abbr: d.a, topic: d.t, question: d.q || '', answer: d.r, isCustom: true });
+    }
+  });
 
   const topics = [...new Set(entries.map(e => e.topic).filter(Boolean))];
   document.getElementById('stats').innerHTML =
     `<div class="stat"><strong>${entries.length}</strong> abbreviations loaded</div>` +
     `<div class="stat"><strong>${topics.length}</strong> categories</div>`;
+
+  // Populate category dropdown
+  const select = document.getElementById('newCategory');
+  select.innerHTML = '<option value="">-- Select category --</option>' +
+    topics.sort().map(t => `<option value="${t}">${t}</option>`).join('') +
+    '<option value="__custom__">+ New category...</option>';
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('app').style.display = 'block';
@@ -424,18 +740,166 @@ function selectEntry(abbr) {
 }
 
 function showResult(entry) {
+  currentEntry = entry;
+  cancelEdit(); // exit edit mode if active
   document.getElementById('resultAbbr').textContent = entry.abbr;
   document.getElementById('resultTopic').textContent = entry.topic;
   document.getElementById('resultQuestion').textContent = entry.question;
   document.getElementById('resultAnswer').textContent = entry.answer;
   document.getElementById('resultCard').classList.add('show');
   document.getElementById('statusBar').textContent = '';
+  // Show badges
+  document.getElementById('editedBadge').style.display = edits[entry.abbr] ? 'inline' : 'none';
+  document.getElementById('customBadge').style.display = entry.isCustom ? 'inline' : 'none';
   // Reset copy button
   const btn = document.getElementById('copyBtn');
   btn.classList.remove('copied');
   btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Answer';
   addToHistory(entry);
 }
+
+// Edit mode
+function enterEditMode() {
+  if (!currentEntry) return;
+  isEditing = true;
+  const answerDiv = document.getElementById('resultAnswer');
+  const textarea = document.getElementById('editTextarea');
+  textarea.value = answerDiv.textContent;
+  answerDiv.style.display = 'none';
+  textarea.style.display = 'block';
+  textarea.focus();
+  document.getElementById('actionBtns').style.display = 'none';
+  document.getElementById('editActionBtns').style.display = 'flex';
+}
+
+function saveEdit() {
+  if (!currentEntry) return;
+  const textarea = document.getElementById('editTextarea');
+  const newAnswer = textarea.value.trim();
+  if (!newAnswer) return;
+
+  // Update in-memory entry
+  currentEntry.answer = newAnswer;
+
+  // Persist to localStorage
+  if (currentEntry.isCustom) {
+    // Update custom entries
+    const idx = customEntries.findIndex(c => c.a === currentEntry.abbr);
+    if (idx >= 0) { customEntries[idx].r = newAnswer; }
+    localStorage.setItem('gpca_custom', JSON.stringify(customEntries));
+  } else {
+    edits[currentEntry.abbr] = newAnswer;
+    localStorage.setItem('gpca_edits', JSON.stringify(edits));
+  }
+
+  // Update display
+  document.getElementById('resultAnswer').textContent = newAnswer;
+  document.getElementById('editedBadge').style.display = edits[currentEntry.abbr] ? 'inline' : 'none';
+  cancelEdit();
+  showToast('Answer saved!', 'success');
+
+  // Update history if this entry is there
+  const hIdx = recentSearches.findIndex(e => e.abbr === currentEntry.abbr);
+  if (hIdx >= 0) {
+    recentSearches[hIdx].answer = newAnswer;
+    localStorage.setItem('gpca_recent', JSON.stringify(recentSearches));
+    renderHistory();
+  }
+}
+
+function cancelEdit() {
+  isEditing = false;
+  document.getElementById('resultAnswer').style.display = '';
+  document.getElementById('editTextarea').style.display = 'none';
+  document.getElementById('actionBtns').style.display = 'flex';
+  document.getElementById('editActionBtns').style.display = 'none';
+}
+
+// Add new entry
+function toggleAddForm() {
+  const form = document.getElementById('addForm');
+  const toggle = document.getElementById('addToggle');
+  const isVisible = form.classList.contains('show');
+  form.classList.toggle('show');
+  toggle.classList.toggle('active');
+  if (!isVisible) document.getElementById('newAbbr').focus();
+}
+
+function clearAddForm() {
+  document.getElementById('newAbbr').value = '';
+  document.getElementById('newCategory').value = '';
+  document.getElementById('newAnswer').value = '';
+}
+
+function saveNewEntry() {
+  const abbr = document.getElementById('newAbbr').value.trim().toLowerCase();
+  let category = document.getElementById('newCategory').value;
+  const answer = document.getElementById('newAnswer').value.trim();
+
+  if (!abbr) { showToast('Please enter an abbreviation.', 'error'); document.getElementById('newAbbr').focus(); return; }
+  if (!category) { showToast('Please select a category.', 'error'); return; }
+  if (!answer) { showToast('Please enter an answer.', 'error'); document.getElementById('newAnswer').focus(); return; }
+
+  // Handle custom category
+  if (category === '__custom__') {
+    category = prompt('Enter new category name:');
+    if (!category || !category.trim()) return;
+    category = category.trim();
+  }
+
+  // Check for duplicate
+  if (entries.find(e => e.abbr === abbr)) {
+    showToast('Abbreviation "' + abbr + '" already exists!', 'error');
+    return;
+  }
+
+  const newEntry = { a: abbr, t: category, q: '', r: answer };
+  customEntries.push(newEntry);
+  localStorage.setItem('gpca_custom', JSON.stringify(customEntries));
+
+  // Add to in-memory entries
+  entries.push({ abbr, topic: category, question: '', answer, isCustom: true });
+
+  // Update stats
+  const topics = [...new Set(entries.map(e => e.topic).filter(Boolean))];
+  document.getElementById('stats').innerHTML =
+    `<div class="stat"><strong>${entries.length}</strong> abbreviations loaded</div>` +
+    `<div class="stat"><strong>${topics.length}</strong> categories</div>`;
+
+  // Update category dropdown
+  const select = document.getElementById('newCategory');
+  select.innerHTML = '<option value="">-- Select category --</option>' +
+    topics.sort().map(t => `<option value="${t}">${t}</option>`).join('') +
+    '<option value="__custom__">+ New category...</option>';
+
+  clearAddForm();
+  showToast('New entry "' + abbr + '" saved!', 'success');
+}
+
+// Toast notification
+function showToast(message, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast ' + (type || '');
+  toast.classList.add('show');
+  setTimeout(() => { toast.classList.remove('show'); }, 2500);
+}
+
+// Category dropdown: handle "+ New category..." option
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'newCategory' && e.target.value === '__custom__') {
+    const name = prompt('Enter new category name:');
+    if (name && name.trim()) {
+      const opt = document.createElement('option');
+      opt.value = name.trim();
+      opt.textContent = name.trim();
+      e.target.insertBefore(opt, e.target.lastElementChild);
+      e.target.value = name.trim();
+    } else {
+      e.target.value = '';
+    }
+  }
+});
 
 function addToHistory(entry) {
   // Remove duplicate if already in history
