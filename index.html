@@ -644,15 +644,99 @@
   }
   .modal-actions .modal-cancel:hover { background: #e4e7eb; }
 
+  /* Login screen */
+  .login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+  }
+  .login-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 380px;
+    max-width: 92vw;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .login-box h2 {
+    font-size: 24px;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .login-box .login-subtitle {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .login-box input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    text-align: center;
+    letter-spacing: 6px;
+    margin-bottom: 6px;
+    transition: border-color 0.2s;
+  }
+  .login-box input[type="password"]:focus {
+    border-color: #4a6cf7;
+    box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.15);
+  }
+  .login-box input[type="password"].error {
+    border-color: #e74c3c;
+    animation: shake 0.4s ease;
+  }
+  .login-error {
+    color: #e74c3c;
+    font-size: 13px;
+    min-height: 22px;
+    margin-bottom: 14px;
+  }
+  .login-btn {
+    background: #4a6cf7;
+    color: #fff;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .login-btn:hover { background: #3a5ce5; }
+
+  /* 2-column history grid */
+  .history-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
   @media (max-width: 600px) {
     .form-row { flex-direction: column; }
     .action-btns { flex-wrap: wrap; }
     .result-header { flex-direction: column; }
+    .history-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
-<div class="container">
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h2>GPCA Text Expander</h2>
+    <p class="login-subtitle">Enter password to access the app</p>
+    <input type="password" id="loginPassword" placeholder="****" maxlength="20" autocomplete="off">
+    <div class="login-error" id="loginError"></div>
+    <button class="login-btn" onclick="verifyLogin()">Unlock</button>
+  </div>
+</div>
+
+<div class="container" id="mainApp" style="display:none;">
   <h1>GPCA Text Expander</h1>
   <p class="subtitle">Type an abbreviation to instantly find the response</p>
 
@@ -781,6 +865,32 @@ let edits = JSON.parse(localStorage.getItem('gpca_edits') || '{}');
 let customEntries = JSON.parse(localStorage.getItem('gpca_custom') || '[]');
 let currentEntry = null;
 let isEditing = false;
+
+// Login gate
+function verifyLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  if (pw !== '1122') {
+    document.getElementById('loginError').textContent = 'Incorrect password.';
+    document.getElementById('loginPassword').classList.add('error');
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginPassword').focus();
+    setTimeout(() => document.getElementById('loginPassword').classList.remove('error'), 500);
+    return;
+  }
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  sessionStorage.setItem('gpca_auth', '1');
+  loadData();
+  renderHistory();
+}
+document.getElementById('loginPassword').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') verifyLogin();
+});
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('gpca_auth') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+}
 
 function loadData() {
   // Base entries
@@ -1101,8 +1211,8 @@ function addToHistory(entry) {
   recentSearches = recentSearches.filter(e => e.abbr !== entry.abbr);
   // Add to front
   recentSearches.unshift({ abbr: entry.abbr, topic: entry.topic, question: entry.question, answer: entry.answer });
-  // Keep only 5
-  if (recentSearches.length > 5) recentSearches = recentSearches.slice(0, 5);
+  // Keep only 20
+  if (recentSearches.length > 20) recentSearches = recentSearches.slice(0, 20);
   localStorage.setItem('gpca_recent', JSON.stringify(recentSearches));
   renderHistory();
 }
@@ -1113,7 +1223,7 @@ function renderHistory() {
     container.innerHTML = '<div class="history-empty">No recent searches yet. Start typing an abbreviation above.</div>';
     return;
   }
-  container.innerHTML = recentSearches.map((item, i) =>
+  container.innerHTML = '<div class="history-grid">' + recentSearches.map((item, i) =>
     `<div class="history-card">
       <div class="history-card-header">
         <div class="history-card-meta">
@@ -1127,7 +1237,7 @@ function renderHistory() {
       </div>
       <div class="history-answer">${item.answer.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
     </div>`
-  ).join('');
+  ).join('') + '</div>';
 }
 
 function copyHistoryAnswer(index) {
@@ -1204,8 +1314,11 @@ document.addEventListener('click', (e) => {
 });
 
 // Load on page ready
-loadData();
-renderHistory();
+// Only load data if already authenticated (otherwise login handler does it)
+if (sessionStorage.getItem('gpca_auth') === '1') {
+  loadData();
+  renderHistory();
+}
 </script>
 </body>
 </html>
